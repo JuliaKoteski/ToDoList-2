@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:bloco_de_notas/Todo_Controller.dart';
 import 'package:bloco_de_notas/service_locator.dart';
 import 'package:flutter/material.dart';
-
-import 'To_do.dart';
+import 'todo.dart';
 
 class TodoItemWidget extends StatefulWidget {
   const TodoItemWidget({super.key, required this.todo});
@@ -16,6 +17,7 @@ class TodoItemWidget extends StatefulWidget {
 class _TodoItemWidgetState extends State<TodoItemWidget> {
   late TextEditingController todoController;
   final controller = getIt<TodolistController>();
+  Timer? debouncer;
 
   @override
   void initState() {
@@ -50,7 +52,10 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
   }
 
   void onChanged(String task) {
-    controller.update(widget.todo.id, task);
+    debouncer?.cancel();
+    debouncer = Timer(const Duration(milliseconds: 500), () {
+      controller.update(widget.todo.id, task);
+    });
   }
 
   //PARA MARCAR CHECKBOX

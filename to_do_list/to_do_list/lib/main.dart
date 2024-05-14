@@ -1,9 +1,12 @@
 import 'package:bloco_de_notas/service_locator.dart';
+import 'package:bloco_de_notas/to_do_list_page.dart';
 import 'package:flutter/material.dart';
-import 'To_do_List_page.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
   setupGetIt();
+  
   runApp(const MyApp());
 }
 
@@ -24,3 +27,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
