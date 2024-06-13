@@ -38,6 +38,8 @@ dependencies:
   get_it: ^7.6.9
   uuid: ^4.4.0
   hive_flutter: ^1.1.0
+  flutter_local_notifications: ^17.1.2
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -91,3 +93,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_local_notifications: ^9.1.5
+
+http: ^0.14.0

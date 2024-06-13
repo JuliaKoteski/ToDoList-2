@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bloco_de_notas/storage_service.dart';
 import 'package:bloco_de_notas/todo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
