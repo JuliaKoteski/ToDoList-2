@@ -3,17 +3,24 @@ import 'package:bloco_de_notas/To_do_List_widget.dart';
 import 'package:bloco_de_notas/Todo_Controller.dart';
 import 'package:bloco_de_notas/Todo_filter.dart';
 import 'package:bloco_de_notas/service_locator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: unused_import
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
   });
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   final controller = getIt<TodolistController>();
   static const List<Tab> tabs = [
     Tab(text: 'Todas'),
@@ -50,7 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (filter == TodoFilter.concluidas) {
                   return const SizedBox.shrink();
                 }
-                return const NewTodoWidget();
+
+                User? user = FirebaseAuth.instance.currentUser;
+
+                if (user == null) {
+                  return const Text('Usuário não autenticado');
+                }
+
+                return NewTodoWidget(user: user);
               }),
           ToDoListWidget(),
         ]),

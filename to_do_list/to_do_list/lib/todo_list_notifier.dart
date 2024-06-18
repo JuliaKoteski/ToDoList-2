@@ -63,6 +63,7 @@ class TodoListNotifier extends ValueNotifier<List<Todo>> {
   }
 
   void _saveTodoListToDB() {
+    // ignore: prefer_typing_uninitialized_variables
     var todo;
     _storageService.saveTodos(_todos.where((element) => todo.task.isNotEmpty).toList());
   }

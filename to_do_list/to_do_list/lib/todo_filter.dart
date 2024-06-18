@@ -3,5 +3,6 @@
 enum TodoFilter {
   todas,
   pendentes,
-  concluidas, all,
+  concluidas,
+  all,
 }

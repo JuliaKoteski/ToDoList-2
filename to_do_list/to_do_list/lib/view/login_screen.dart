@@ -1,72 +1,73 @@
-import 'package:bloco_de_notas/to_do_list_page.dart';
+import 'package:bloco_de_notas/auth_service.dart';
+import 'package:bloco_de_notas/view/register_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    String username = '';
-    String password = '';
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _senhaController = TextEditingController();
+
+  AuthService authService = AuthService();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              onChanged: (value) {
-                username = value;
-              },
-              decoration: const InputDecoration(labelText: 'Username'),
-            ),
-            const SizedBox(height: 20.0),
-            TextField(
-              onChanged: (value) {
-                password = value;
-              },
-              decoration: const InputDecoration(labelText: 'Password'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                // Lógica de autenticação
-                if (username == 'seu_usuario' && password == 'sua_senha') {
-                  // Autenticação bem-sucedida, navegar para a próxima tela
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MyHomePage()));
-                } else {
-                  // Exibir mensagem de erro se a autenticação falhar
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Erro de autenticação'),
-                        content: const Text('Nome de usuário ou senha incorretos.'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-              child: const Text('Login'),
-            ),
-          ],
-        ),
-      ),
+      body: Container(
+          color: Colors.deepPurple,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    children: [
+                      const FlutterLogo(size: 76),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(hintText: 'E-mail'),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        obscureText: true,
+                        controller: _senhaController,
+                        decoration: const InputDecoration(hintText: 'Senha'),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          authService.entrarUsuario(
+                              email: _emailController.text,
+                              senha: _senhaController.text);
+                        },
+                        child: const Text('Acessar'),
+                      ),
+                      const SizedBox(height: 16),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => RegisterScreen()));
+                        },
+                        child: const Text('Criar sua Conta'),
+                      ),
+                    ],
+                  ))
+            ],
+          )),
     );
   }
 }
-
-

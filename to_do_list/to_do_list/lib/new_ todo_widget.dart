@@ -1,11 +1,24 @@
+// ignore_for_file: file_names
+
+// ignore: unused_import
+import 'package:bloco_de_notas/menu.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:bloco_de_notas/Todo_Controller.dart';
 import 'package:bloco_de_notas/service_locator.dart';
-import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class NewTodoWidget extends StatefulWidget {
-  const NewTodoWidget({
+  final User user;
+  
+  NewTodoWidget({
     super.key,
+    required this.user,
   });
+
+  //NewTodoWidget(user);
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   State<NewTodoWidget> createState() => _NewTodoWidgetState();

@@ -8,9 +8,10 @@ import 'package:bloco_de_notas/notification_service.dart';
 final getIt = GetIt.instance;
 
 void setupGetIt() {
-  getIt.registerLazySingleton<TodolistController>(() => TodolistController());
   getIt.registerLazySingleton<StorageService>(() => HiveStorage());
   getIt.registerLazySingleton<NotificationService>(() => NotificationService());
-  
-  getIt.registerLazySingleton<ApiService>(() => ApiService('http://localhost:3000/api'));
+  getIt.registerLazySingleton<TodolistController>(() => TodolistController());
+ 
+  getIt.registerLazySingleton<ApiService>(
+      () => ApiService('http://localhost:3000/api'));
 }

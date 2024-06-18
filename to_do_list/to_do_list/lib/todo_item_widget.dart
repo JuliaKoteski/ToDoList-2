@@ -5,6 +5,7 @@ import 'package:bloco_de_notas/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'todo.dart';
 
+
 class TodoItemWidget extends StatefulWidget {
   const TodoItemWidget({super.key, required this.todo});
 
@@ -16,7 +17,9 @@ class TodoItemWidget extends StatefulWidget {
 
 class _TodoItemWidgetState extends State<TodoItemWidget> {
   late TextEditingController todoController;
+
   final controller = getIt<TodolistController>();
+
   Timer? debouncer;
 
   @override
